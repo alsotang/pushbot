@@ -11,7 +11,7 @@
     "sourceMap": false,
     "esModuleInterop": true,
     "noImplicitAny": true,
-    "types": ["node", "koa-body"],
+    "types": ["node"],
     "baseUrl": "./",
     "paths": {
       "@/*": ["./*"]
