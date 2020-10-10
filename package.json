@@ -4,17 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "push": "git push heroku master && git push",
+    "push": "git push heroku main && git push",
     "start": "NODE_ENV=development nodemon main.ts",
     "build": "tsc"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "koa": "^2.13.0",
+    "koa-body": "^4.2.0",
     "telegraf": "^3.38.0",
     "uuid": "^8.3.1"
   },
   "devDependencies": {
+    "@types/koa": "^2.11.4",
     "@types/node": "^14.11.8",
     "@types/uuid": "^8.3.0",
     "nodemon": "^2.0.4",

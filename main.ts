@@ -1,37 +1,21 @@
-import { bot } from "./lib/bot";
+import Koa from 'koa'
+import koaBody from "koa-body";
 import {config} from './config'
-import {setCommands} from './lib/commands'
-import { v4 as uuidv4 } from 'uuid';
+import {ServerResponse} from 'http'
 
-const helpMsg = `A simple push service built on Telegram`;
+import { bot } from "./bot";
 
-
-async function main() {
-  bot.start(ctx => ctx.reply(helpMsg));
-  bot.help(ctx => ctx.reply(helpMsg));
-
-  bot.command('regenerate', (ctx) => {
-    const newPushId = uuidv4();
-
-    ctx.reply(`Your push id is now:
-
-${newPushId}
-`)
-  });
-
-  bot.catch((err: any) => {
-    console.error('Ooops', err);
-  });
-
-  setCommands(bot);
-
-  if (config.isDev) {
-    bot.startPolling();
-  } else {
-    bot.telegram.setWebhook(`${config.baseUrl}${config.SECRET_PATH}`);
-
-    bot.startWebhook(config.SECRET_PATH, null, config.webPort);
+const app = new Koa()
+app.use(koaBody())
+app.use(async (ctx, next) => {
+  if (ctx.method !== 'POST' || ctx.url !== config.SECRET_PATH) {
+    return next()
   }
-}
+  await bot.handleUpdate(ctx.request.body, ctx.response as unknown as ServerResponse)
+  ctx.status = 200
+})
+app.use(async (ctx) => {
+  ctx.body = 'Hello World'
+})
 
-main();
+app.listen(config.webPort)

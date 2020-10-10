@@ -1,6 +1,6 @@
 export const config = {
   isDev: process.env.NODE_ENV === 'development',
-  webPort: Number(process.env.PORT),
+  webPort: Number(process.env.PORT) || 8080,
 
   // START developer should customize
   PUSHBOT_TOKEN: process.env.PUSHBOT_TOKEN!,
