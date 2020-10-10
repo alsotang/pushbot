@@ -19,7 +19,7 @@ app.use(async (ctx, next) => {
 
 
 app.use(async (ctx) => {
-  ctx.redirect('https://github.com/alsotang/pushbot');
+  ctx.redirect(config.githubRepo);
 })
 
 app.listen(config.webPort)

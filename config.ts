@@ -1,7 +1,7 @@
 export const config = {
   isDev: process.env.NODE_ENV === 'development',
-  description: 'A simple push service built on Telegram',
   webPort: Number(process.env.PORT) || 8080,
+  githubRepo: 'https://github.com/alsotang/pushbot',
 
   // START developer should customize
   PUSHBOT_TOKEN: process.env.PUSHBOT_TOKEN!,

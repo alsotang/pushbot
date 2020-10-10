@@ -1,7 +1,8 @@
-import { Telegraf } from "telegraf";
+import { Telegraf, Context } from "telegraf";
 import {config} from './config'
 import {setCommands} from './lib/commands'
 import { pool } from "./lib/pg";
+import { v4 as uuidv4 } from 'uuid';
 
 const token = config.isDev ? config.PUSHTESTBOT_TOKEN : config.PUSHBOT_TOKEN!;
 const bot = new Telegraf(token);
@@ -9,15 +10,8 @@ const bot = new Telegraf(token);
 const ERROR_MSG = 'Something wrong. Please contact alsotang@gmail.com.'
 
 
-import { v4 as uuidv4 } from 'uuid';
-
-const helpMsg = config.description;
-
-
-bot.start(ctx => ctx.reply(helpMsg));
-bot.help(ctx => ctx.reply(helpMsg));
-
-bot.command('regenerate', async (ctx) => {
+// renegenate push id
+const regenerateController = async (ctx: Context) => {
   const telegram_user_id =  ctx.message?.from?.id;
   const newPushId = uuidv4();
 
@@ -31,8 +25,13 @@ bot.command('regenerate', async (ctx) => {
 
   ctx.reply(`Your push id is now:
 
-${newPushId}`)
-});
+${newPushId}
+
+for more info, see: ${config.githubRepo}`)
+}
+
+bot.start(regenerateController);
+bot.command('regenerate', regenerateController);
 
 bot.catch((err: any) => {
   console.error('Ooops', err);
