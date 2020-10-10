@@ -24,15 +24,15 @@ const router = new Router();
 router.post('/push', async (ctx, next) => {
   const body = ctx.request.body as PushMessage;
 
-  const to = body.to;
+  const pushid = body.pushid;
   const content = body.content;
 
-  const chatIdRes = await pool.query(`select * from pushid where pushid=$1`, [to]);
+  const chatIdRes = await pool.query(`select * from pushid where pushid=$1`, [pushid]);
   const rows =  chatIdRes.rows;
   if (rows.length === 0) {
     ctx.body = {
       success: false,
-      error_msg: `no such pushid: ${to}`
+      error_msg: `no such pushid: ${pushid}`
     }
     return;
   }

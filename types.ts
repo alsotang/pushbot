@@ -1,4 +1,4 @@
 export interface PushMessage {
-  to: number,
+  pushid: number,
   content: string,
 }
