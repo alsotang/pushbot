@@ -20,7 +20,7 @@ When you wanna notify your user some info instantly. And you dont have a native 
     }).then(res => {
       console.log(res)
     }).catch(err => {
-      console.log(err)
+      console.error(err)
     })
     ```
 
