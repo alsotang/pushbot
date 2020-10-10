@@ -12,12 +12,12 @@ const ERROR_MSG = 'Something wrong. Please contact alsotang@gmail.com.'
 
 // renegenate push id
 const regenerateController = async (ctx: Context) => {
-  const telegram_user_id =  ctx.message?.from?.id;
+  const telegram_chat_id =  ctx.chat?.id;
   const newPushId = uuidv4();
 
   try {
-    await pool.query(`delete from pushid where telegram_user_id=$1;`, [telegram_user_id]);
-    await pool.query(`insert into pushid(telegram_user_id, pushid) values($1, $2);`, [telegram_user_id, newPushId]);
+    await pool.query(`delete from pushid where telegram_chat_id=$1;`, [telegram_chat_id]);
+    await pool.query(`insert into pushid(telegram_chat_id, pushid) values($1, $2);`, [telegram_chat_id, newPushId]);
   } catch (e) {
     ctx.reply(`${ERROR_MSG}\n${e}`)
     return;

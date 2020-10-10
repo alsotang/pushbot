@@ -10,7 +10,12 @@
     "moduleResolution": "node",
     "sourceMap": false,
     "esModuleInterop": true,
-    "types": ["node", "koa-body"]
+    "noImplicitAny": true,
+    "types": ["node", "koa-body"],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": [
     "./**/*.ts",
