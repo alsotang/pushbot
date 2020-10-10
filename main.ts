@@ -7,6 +7,8 @@ import { bot } from "./bot";
 
 const app = new Koa()
 app.use(koaBody())
+
+// try delegate to telegram bot handler
 app.use(async (ctx, next) => {
   if (ctx.method !== 'POST' || ctx.url !== config.SECRET_PATH) {
     return next()
@@ -14,8 +16,10 @@ app.use(async (ctx, next) => {
   await bot.handleUpdate(ctx.request.body, ctx.response as unknown as ServerResponse)
   ctx.status = 200
 })
+
+
 app.use(async (ctx) => {
-  ctx.body = 'Hello World'
+  ctx.redirect('https://github.com/alsotang/pushbot');
 })
 
 app.listen(config.webPort)
