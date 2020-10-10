@@ -24,8 +24,6 @@ const router = new Router();
 router.post('/push', async (ctx, next) => {
   const body = ctx.request.body as PushMessage;
 
-  console.log('body', body)
-
   const to = body.to;
   const content = body.content;
 
@@ -40,7 +38,7 @@ router.post('/push', async (ctx, next) => {
   }
   const chatId = rows[0].telegram_chat_id as number;
 
-  bot.telegram.sendMessage(chatId, content);
+  bot.telegram.sendMessage(chatId, content, {});
 })
 router.get('/', (ctx, next) => {
   ctx.redirect(config.githubRepo);
