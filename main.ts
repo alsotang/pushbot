@@ -26,6 +26,7 @@ router.post('/push', async (ctx, next) => {
 
   const pushid = body.pushid;
   const content = body.content;
+  const parse_mode = body.parse_mode;
 
   const chatIdRes = await pool.query(`select * from pushid where pushid=$1`, [pushid]);
   const rows =  chatIdRes.rows;
@@ -38,7 +39,18 @@ router.post('/push', async (ctx, next) => {
   }
   const chatId = rows[0].telegram_chat_id as number;
 
-  bot.telegram.sendMessage(chatId, content, {});
+  try {
+    bot.telegram.sendMessage(chatId, content, {parse_mode});
+  } catch (e) {
+    ctx.body = {
+      success: false,
+      error_msg: `${e}`
+    }
+    return;
+  }
+  ctx.body = {
+    success: true,
+  }
 })
 router.get('/', (ctx, next) => {
   ctx.redirect(config.githubRepo);

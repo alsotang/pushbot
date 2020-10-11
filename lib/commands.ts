@@ -5,7 +5,15 @@ import { TelegrafContext } from "telegraf/typings/context";
 const commands = [
   {
     command: 'regenerate',
-    description: 'regenerate your push id'
+    description: 'Regenerate your push id'
+  },
+  {
+    command: 'mypushid',
+    description: 'Show your current push id'
+  },
+  {
+    command: 'help',
+    description: 'Show help message'
   },
 ]
 

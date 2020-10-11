@@ -24,6 +24,20 @@ When you wanna notify your user some info instantly. And you dont have a native 
     })
     ```
 
+# api
+
+## post /push
+
+```ts
+export interface PushMessage {
+  pushid: number,
+  content: string,
+  parse_mode?: "Markdown" | "MarkdownV2" | "HTML" | undefined, // see https://core.telegram.org/bots/api#sendmessage
+}
+```
+
+Since Telegram's markdown support is terrible, and richtext format is simple. If you want to send richtext message, try send https://telegra.ph/api or other external link.
+
 # host your own
 
 customize your own bot token and other things. See [./config.ts](./config.ts)
