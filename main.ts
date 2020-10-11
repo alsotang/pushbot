@@ -40,7 +40,7 @@ router.post('/push', async (ctx, next) => {
   const chatId = rows[0].telegram_chat_id as number;
 
   try {
-    bot.telegram.sendMessage(chatId, content, {parse_mode});
+    await bot.telegram.sendMessage(chatId, content, {parse_mode});
   } catch (e) {
     ctx.body = {
       success: false,
