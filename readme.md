@@ -4,11 +4,11 @@ A simple push service built on Telegram
 
 # When to use
 
-When you wanna notify your user some info instantly. And you dont have a native app or dont wanna send email.
+When you wanna notify your user some info instantly. And you dont have a native app or dont wanna send a email.
 
 # How to use
 
-1. Let your user start this bot using Telegram [puuushbot](https://t.me/puuushbot)
+1. Let your user start this bot using Telegram: [puuushbot](https://t.me/puuushbot)
 2. User would give you back a push id
 3. curl the push service:
 
