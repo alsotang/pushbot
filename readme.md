@@ -4,12 +4,12 @@ A simple push service built on Telegram
 
 # When to use
 
-When you wanna notify your user some info instantly. And you dont have a native app or dont wanna send a email.
+When you wanna notify yourself some messages instantly. And you dont have a native app or dont wanna send an email.
 
 # How to use
 
-1. Let your user start this bot using Telegram: [puuushbot](https://t.me/puuushbot)
-2. User would give you back a push id
+1. Start this bot using Telegram: [puuushbot](https://t.me/puuushbot)
+2. The bot would generate a token for you
 3. curl the push service:
 
     ```shell
@@ -43,8 +43,8 @@ export interface PushMessage {
 }
 ```
 
-Since Telegram's markdown support is terrible, and richtext format is simple. If you want to send richtext message, try send https://telegra.ph/api or other external link.
+Since Telegram's markdown support is terrible, and richtext format is crude. If you want to send richtext message, try to use a [Telegraph](https://telegra.ph/api) link or other external link.
 
-# host your own
+# host your own pushbot
 
-customize your own bot token and other things. See [./config.ts](./config.ts)
+customize your own telegram bot token and other things. See [./config.ts](./config.ts)
