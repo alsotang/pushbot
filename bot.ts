@@ -50,7 +50,7 @@ bot.catch((err: any) => {
 setCommands(bot);
 
 if (config.isDev) {
-  bot.startPolling();
+  bot.launch();
 } else {
   bot.telegram.setWebhook(`${config.baseUrl}${config.SECRET_PATH}`);
 }

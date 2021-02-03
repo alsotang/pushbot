@@ -13,11 +13,10 @@ app.use(bodyParse({}))
 
 // try delegate to telegram bot handler
 app.use(async (ctx, next) => {
-  if (ctx.method !== 'POST' || ctx.url !== config.SECRET_PATH) {
-    return next()
+  if (ctx.url === config.SECRET_PATH) {
+    return await bot.handleUpdate(ctx.request.body)
   }
-  await bot.handleUpdate(ctx.request.body, ctx.response as unknown as ServerResponse)
-  ctx.status = 200
+  return next()
 })
 
 const router = new Router();

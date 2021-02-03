@@ -1,6 +1,4 @@
-import { Telegraf } from "telegraf";
-import { TelegrafContext } from "telegraf/typings/context";
-
+import { Telegraf, Context } from "telegraf";
 
 const commands = [
   {
@@ -17,7 +15,7 @@ const commands = [
   },
 ]
 
-function setCommands(bot: Telegraf<TelegrafContext>) {
+function setCommands(bot: Telegraf<Context>) {
   bot.telegram.setMyCommands(commands)
 }
 
