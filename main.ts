@@ -14,7 +14,9 @@ app.use(bodyParse({}))
 // try delegate to telegram bot handler
 app.use(async (ctx, next) => {
   if (ctx.url === config.SECRET_PATH) {
-    return await bot.handleUpdate(ctx.request.body)
+    bot.handleUpdate(ctx.request.body)
+    ctx.status = 200;
+    return ;
   }
   return next()
 })
