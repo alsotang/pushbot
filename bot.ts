@@ -5,7 +5,11 @@ import { pool } from "./lib/pg";
 import { v4 as uuidv4 } from 'uuid';
 
 const token = config.isDev ? config.PUSHTESTBOT_TOKEN : config.PUSHBOT_TOKEN!;
-const bot = new Telegraf(token);
+const bot = new Telegraf(token, {
+  telegram: {
+    webhookReply: false,
+  }
+});
 
 const ERROR_MSG = 'Something wrong. Please contact alsotang@gmail.com.'
 const HELP_MSG = `For more info, see: ${config.githubRepo}`
