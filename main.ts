@@ -25,7 +25,7 @@ const router = new Router();
 router.post('/push', async (ctx, next) => {
   const body = ctx.request.body as PushMessage;
 
-  const pushid = body.pushid;
+  const pushid = body.pushid || body.push_id; // .pushid for compat
   const content = body.content;
   const parse_mode = body.parse_mode;
 
@@ -34,7 +34,7 @@ router.post('/push', async (ctx, next) => {
   if (rows.length === 0) {
     ctx.body = {
       success: false,
-      error_msg: `no such pushid: ${pushid}`
+      error_msg: `no such push id: ${pushid}`
     }
     return;
   }

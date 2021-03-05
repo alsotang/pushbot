@@ -13,7 +13,7 @@ When you wanna notify yourself some messages instantly. And you dont have a nati
 3. curl the push service:
 
     ```shell
-    curl https://push.alsotang.com/push -v -H "Content-type: application/json" -L -d '{"pushid": "3a1648fe-0ce3-4aed-8b11-a1cfa55b44a8", "content":  "I am the message https://i.loli.net/2020/10/11/oQWFTGrZPAUiXaJ.jpg"}'
+    curl https://push.alsotang.com/push -v -H "Content-type: application/json" -L -d '{"push_id": "3a1648fe-0ce3-4aed-8b11-a1cfa55b44a8", "content":  "I am the message https://i.loli.net/2020/10/11/oQWFTGrZPAUiXaJ.jpg"}'
     ```
 
     or write code:
@@ -22,7 +22,7 @@ When you wanna notify yourself some messages instantly. And you dont have a nati
     const axios = require('axios')
 
     axios.post('https://push.alsotang.com/push', {
-      "pushid": "3a1648fe-0ce3-4aed-8b11-a1cfa55b44a8",
+      "push_id": "3a1648fe-0ce3-4aed-8b11-a1cfa55b44a8",
       "content": "I am the message https://i.loli.net/2020/10/11/oQWFTGrZPAUiXaJ.jpg"
     }).then(res => {
       console.log(res)
@@ -37,7 +37,7 @@ When you wanna notify yourself some messages instantly. And you dont have a nati
 
 ```ts
 export interface PushMessage {
-  pushid: number,
+  push_id: number,
   content: string,
   parse_mode?: "Markdown" | "MarkdownV2" | "HTML" | undefined, // see https://core.telegram.org/bots/api#sendmessage
 }
