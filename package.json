@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "push": "git push heroku main && git push",
-    "start": "NODE_ENV=development nodemon main.ts",
+    "dev": "NODE_ENV=development nodemon main.ts",
     "build": "tsc"
   },
   "author": "",
