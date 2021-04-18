@@ -11,16 +11,6 @@ import { bot } from "./bot";
 const app = new Koa()
 app.use(bodyParse({}))
 
-// try delegate to telegram bot handler
-app.use(async (ctx, next) => {
-  if (ctx.url === config.SECRET_PATH) {
-    bot.handleUpdate(ctx.request.body)
-    ctx.status = 200;
-    return ;
-  }
-  return next()
-})
-
 const router = new Router();
 router.post('/push', async (ctx, next) => {
   const body = ctx.request.body as PushMessage;
