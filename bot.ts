@@ -52,7 +52,7 @@ setCommands(bot);
 if (config.isDev) {
   bot.launch();
 } else {
-  bot.telegram.setWebhook(`${config.baseUrl}${config.SECRET_PATH}`);
+  bot.launch()
 }
 
 
