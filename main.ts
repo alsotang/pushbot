@@ -1,10 +1,10 @@
 import Koa from 'koa'
 import bodyParse from 'koa-bodyparser'
-import {config} from './config'
-import {ServerResponse} from 'http'
+import { config } from './config'
+import { ServerResponse } from 'http'
 import Router from '@koa/router'
 import { PushMessage } from "@/types";
-import { pool } from "./lib/pg";
+import { getChatId } from './lib/dao'
 
 import { bot } from "./bot";
 
@@ -19,19 +19,19 @@ router.post('/push', async (ctx, next) => {
   const content = body.content;
   const parse_mode = body.parse_mode;
 
-  const chatIdRes = await pool.query(`select * from pushid where pushid=$1`, [pushid]);
-  const rows =  chatIdRes.rows;
-  if (rows.length === 0) {
+  let chatId: number
+  try {
+    chatId = await getChatId(pushid);
+  } catch (e) {
     ctx.body = {
       success: false,
-      error_msg: `no such push id: ${pushid}`
+      error_msg: String(e)
     }
-    return;
+    return
   }
-  const chatId = rows[0].telegram_chat_id as number;
 
   try {
-    await bot.telegram.sendMessage(chatId, content, {parse_mode});
+    await bot.telegram.sendMessage(chatId, content, { parse_mode });
   } catch (e) {
     ctx.body = {
       success: false,
